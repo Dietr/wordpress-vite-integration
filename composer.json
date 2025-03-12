@@ -1,5 +1,5 @@
 {
-  "name": "dietr/wordpress-vite-integration",
+  "name": "dietr/wp-vite-integration",
   "description": "Add vite integration to your WordPress theme",
   "license": "MIT",
   "type": "wordpress-muplugin",
@@ -21,5 +21,10 @@
   "prefer-stable": true,
   "config": {
       "preferred-install": "dist"
+  },
+  "autoload": {
+      "psr-4": {
+          "Dietr\\WPViteIntegration\\": "src/"
+      }
   }
 }

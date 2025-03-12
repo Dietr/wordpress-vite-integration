@@ -5,7 +5,27 @@ Inspired by https://github.com/nystudio107/craft-vite.
 
 ## Installation
 
-Via composer as mu-plugin.
+Via composer as mu-plugin:
+
+```bash
+composer require dietr/wp-vite-integration
+```
+
+Add this to your `composer.json`:
+
+```json
+{
+    "require": {
+        "your-vendor/wp-vite-integration": "^1.0"
+    }
+}
+```
+
+Then run:
+
+```bash
+composer install
+```
 
 ## functions.php
 
