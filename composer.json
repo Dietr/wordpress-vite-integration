@@ -1,0 +1,25 @@
+{
+  "name": "dietr/wordpress-vite-integration",
+  "description": "Add vite integration to your WordPress theme",
+  "license": "MIT",
+  "type": "wordpress-muplugin",
+  "keywords": [
+      "vite",
+      "wordpress",
+      "plugin"
+  ],
+  "authors": [
+      {
+          "name": "Dieter Peirs",
+          "homepage": "https://github.com/dietr"
+      }
+  ],
+  "require": {
+      "php": "^8.2"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+      "preferred-install": "dist"
+  }
+}
