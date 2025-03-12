@@ -1,5 +1,6 @@
 # Vite integration for Wordpress
 
+Handles Vite integration for WordPress theme development.
 Inspired by https://github.com/nystudio107/craft-vite.
 
 ## Installation
@@ -56,7 +57,8 @@ if (process.env.NODE_ENV !== 'test') {  // Avoid running in test environment
 }
 ```
 
-Setup your build and dev task
+Setup your build and dev task in your `package.json`
+
 ```
   "build": "node viteDevServerToggle.js 0 && npx vite build",
   "dev": "node viteDevServerToggle.js 1 && npx vite",
