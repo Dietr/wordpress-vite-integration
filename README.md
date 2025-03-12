@@ -16,7 +16,7 @@ Add this to your `composer.json`:
 ```json
 {
     "require": {
-        "your-vendor/wp-vite-integration": "^1.0"
+        "dietr/wp-vite-integration": "^1.0"
     }
 }
 ```

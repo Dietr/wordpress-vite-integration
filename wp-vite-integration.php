@@ -8,7 +8,7 @@
  * License: MIT
  */
 
-namespace ViteIntegration;
+namespace WPViteIntegration;
 
 class ViteAssets {
     private static $instance = null;
@@ -123,17 +123,17 @@ class ViteAssets {
     }
 }
 
-$GLOBALS['vite_integration'] = ViteAssets::getInstance();
+$GLOBALS['wp_vite_integration'] = ViteAssets::getInstance();
 
 // Example usage in your theme's functions.php:
 /*
 add_action('after_setup_theme', function() {
-    ViteIntegration\vite()->setConfig([
-        'env_file' => get_template_directory() . '/../../../.env',
-        'manifest_path' => get_template_directory() . '/dist/.vite/manifest.json',
-        'manifest_uri' => get_template_directory_uri() . '/dist',
-        'entry_point' => '/src/js/index.js',
-        'vite_port' => '5173'
-    ]);
+  $GLOBALS['wp_vite_integration']->setConfig([
+      'env_file' => get_template_directory() . '/../../../.env',
+      'manifest_path' => get_template_directory() . '/dist/.vite/manifest.json',
+      'manifest_uri' => get_template_directory_uri() . '/dist',
+      'entry_point' => '/src/js/index.js',
+      'vite_port' => '5173'
+  ]);
 });
 */
