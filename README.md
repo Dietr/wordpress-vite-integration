@@ -36,7 +36,7 @@ add_action('after_setup_theme', function() {
       'env_file' => get_template_directory() . '/../../../.env',
       'manifest_path' => get_template_directory() . '/dist/.vite/manifest.json',
       'manifest_uri' => get_template_directory_uri() . '/dist',
-      'entry_point' => '/src/js/index.js',
+      'entry_point' => '/resources/js/index.js',
       'vite_port' => '5173'
   ]);
 });
