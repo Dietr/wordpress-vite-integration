@@ -22,10 +22,11 @@ class ViteAssets {
         return self::$instance;
     }
     
-    private function __construct() {
+    public function __construct() {
         $this->setDefaultConfig();
         $this->loadEnvFile();
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets'], 9);
+        add_filter('script_loader_tag', [$this, 'addModuleType'], 10, 3);
     }
 
     private function setDefaultConfig() {
@@ -33,7 +34,7 @@ class ViteAssets {
             'env_file' => WP_CONTENT_DIR . '/../../.env',
             'manifest_path' => get_template_directory() . '/dist/.vite/manifest.json',
             'manifest_uri' => get_template_directory_uri() . '/dist',
-            'entry_point' => '/src/js/index.js',
+            'entry_point' => '/resources/js/index.js',
             'ddev_url' => getenv('DDEV_PRIMARY_URL') ?: 'https://wordpress-theming.ddev.site',
             'vite_port' => '5173'
         ];
@@ -83,12 +84,14 @@ class ViteAssets {
     private function enqueueDevAssets($vite_dev_server, $entry_point) {
         wp_enqueue_script('vite-client', 
             $vite_dev_server . '/@vite/client',
-            [], null, true
+            [], null, true,
+            ['type' => 'module']
         );
         
         wp_enqueue_script('vite-entry', 
             $vite_dev_server . $entry_point,
-            ['vite-client'], null, true
+            ['vite-client'], null, true,
+            ['type' => 'module']
         );
     }
 
@@ -103,7 +106,8 @@ class ViteAssets {
             if ($key === 'src/js/index.js' || $key === basename($this->config['entry_point'])) {
                 wp_enqueue_script('vite', 
                     $this->config['manifest_uri'] . '/' . $entry['file'],
-                    [], null, true
+                    [], null, true,
+                    ['type' => 'module']
                 );
 
                 if (isset($entry['css']) && is_array($entry['css'])) {
@@ -121,6 +125,21 @@ class ViteAssets {
     public function getEnv($key, $default = null) {
         return $this->env_vars[$key] ?? $default;
     }
+
+    /**
+     * Add type="module" to Vite scripts
+     */
+    public function addModuleType($tag, $handle, $src): string
+    {
+        // List of script handles that should be loaded as modules
+        $modules = ['vite-client', 'vite-entry'];
+        
+        if (in_array($handle, $modules)) {
+            return str_replace('<script ', '<script type="module" ', $tag);
+        }
+        
+        return $tag;
+    }
 }
 
 $GLOBALS['wp_vite_integration'] = ViteAssets::getInstance();
@@ -132,7 +151,7 @@ add_action('after_setup_theme', function() {
       'env_file' => get_template_directory() . '/../../../.env',
       'manifest_path' => get_template_directory() . '/dist/.vite/manifest.json',
       'manifest_uri' => get_template_directory_uri() . '/dist',
-      'entry_point' => '/src/js/index.js',
+      'entry_point' => '/resources/js/index.js',
       'vite_port' => '5173'
   ]);
 });
