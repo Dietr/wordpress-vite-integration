@@ -3,7 +3,7 @@
  * Plugin Name: Wordpress Vite Integration
  * Plugin URI: 
  * Description: Handles Vite integration for WordPress theme development
- * Version: 1.0.0
+ * Version: 0.2.0
  * Author: Dieter Peirs
  * License: MIT
  */
