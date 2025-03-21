@@ -103,7 +103,7 @@ class ViteAssets {
         $manifest = json_decode(file_get_contents($this->config['manifest_path']), true);
         
         foreach ($manifest as $key => $entry) {
-            if ($key === 'src/js/index.js' || $key === basename($this->config['entry_point'])) {
+            if ($key === 'resources/js/index.js' || $key === basename($this->config['entry_point'])) {
                 wp_enqueue_script('vite', 
                     $this->config['manifest_uri'] . '/' . $entry['file'],
                     [], null, true,
@@ -129,7 +129,7 @@ class ViteAssets {
     /**
      * Add type="module" to Vite scripts
      */
-    public function addModuleType($tag, $handle, $src): string
+    public function addModuleType($tag, $handle, $resources): string
     {
         // List of script handles that should be loaded as modules
         $modules = ['vite-client', 'vite-entry'];
